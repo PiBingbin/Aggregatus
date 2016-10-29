@@ -2,7 +2,7 @@ Going through Numpy CookBook by Ivan Idris
 
 ## To DO 
 
-- [ ] Chap1: Winding Along with Ipython
+- [X] Chap1: Winding Along with Ipython
 
 - [ ] chap2: Advanced Indexing and Array Concepts
 
