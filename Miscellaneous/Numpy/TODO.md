@@ -4,7 +4,7 @@ Going through Numpy CookBook by Ivan Idris
 
 - [X] Chap1: Winding Along with Ipython
 
-- [ ] chap2: Advanced Indexing and Array Concepts
+- [X] chap2: Advanced Indexing and Array Concepts
 
 - [ ] chap3: Getting to Grips with Commonly Used Functions
 
