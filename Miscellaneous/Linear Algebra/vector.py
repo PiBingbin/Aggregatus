@@ -1,3 +1,4 @@
+from math import sqrt
 
 class Vector(object):
     def __init__(self, coordinates):
@@ -59,6 +60,37 @@ class Vector(object):
         return Vector(new_coordinates)
 
 
+    # def magnitude_direction(self):
+    #     """Returns the magnitude of a vector"""
+
+    #     new_coordinates = [x**2 for x in self.coordinates]
+    #     magnitude = sqrt(sum(new_coordinates))
+    #     try:
+    #         direction = [round(1.0/magnitude * x, 3) for x in self.coordinates if magnitude != 0 ]
+
+    #     except:
+    #         raise Exception("Zero Vector does not have a direction")
+
+        
+    #     return "Magnitude: {}".format(round(magnitude, 3)), "Direction: {}".format(direction)
+
+
+    def magnitude(self):
+        """Returns the magnitude of a vector"""
+        new_coordinates_squared = [x**2 for x in self.coordinates]
+        return sqrt(sum(new_coordinates_squared))
+
+
+    def normalized(self):
+        """Returns the normalized vector"""
+        try:
+            magnitude = self.magnitude()
+            return self.times_scalar(1./magnitude)
+
+        except ZeroDivisionError:
+            raise Exception("Cannot normalize the zero vector")
+
+
 
 
 
@@ -72,3 +104,18 @@ b = Vector([5, 8, 10])
 print a.plus(b)
 print a.minus(b)
 print a.times_scalar(3)
+
+
+c = Vector([5.581, -2.136])
+print "c", c.normalized()
+
+d = Vector([1.996, 3.108, -4.554])
+print "d:", d.normalized()
+
+e = Vector([-0.221, 7.437])
+print "e", e.magnitude()
+
+f = Vector([8.813, -1.331, -6.247])
+print "f", f.magnitude()
+
+
