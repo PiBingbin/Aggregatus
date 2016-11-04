@@ -6,6 +6,8 @@ getcontext().prec = 30
 class Vector(object):
 
     CANNOT_NORMALIZE_ZERO_VECTOR_MSG = "Cannot normalize the zero vector"
+    NO_UNIQUE_PARALLEL_COMPONENT_MSG = "No unique parallel component"
+    NO_UNIQUE_ORTHOGONAL_COMPONENT_MSG = "No unique orthogonal component"
     def __init__(self, coordinates):
 
         try:
@@ -136,6 +138,33 @@ class Vector(object):
         return self.magnitude() < tolerance
 
 
+    def component_orthogonal_to(self, basis):
+        try:
+            projection = self.component_parallel_to(basis)
+            return self.minus(projection)
+
+        except Exception as e:
+            if str(e) == self.NO_UNIQUE_PARALLEL_COMPONENT_MSG:
+                raise Exception(self.NO_UNIQUE_ORTHOGONAL_COMPONENT_MSG)
+
+            else:
+                raise e
+
+    def component_parallel_to(self, basis):
+        try:
+            u = basis.normalized()
+            weight = self.dot_product(u)
+            return u.times_scalar(weight)
+
+
+        except Exception as e:
+            if str(e) == self.NO_UNIQUE_PARALLEL_COMPONENT_MSG:
+                raise Exception(self.NO_UNIQUE_ORTHOGONAL_COMPONENT_MSG)
+
+            else:
+                raise e 
+
+
 
 
 
@@ -165,14 +194,16 @@ class Vector(object):
 v1 = Vector([7.35, 0.221, 5.188])
 v2 = Vector([2.751, 8.259, 3.985])
 
-a = Vector([0, 0])
-b = Vector([-2.668, 5.319])
+a = Vector([3.097, 1.879])
+b = Vector([0.825, 2.036])
 
 # print v1.dot_product(v2)
 # print v1.angle_with(v2, in_degrees=True)
 # print a.angle_with(b, in_degrees=False)
+# print a.is_parallel_to(b)
+print a.component_parallel_to(b)
+print a.component_orthogonal_to(b)
 
-print a.is_parallel_to(b)
 
 
 
