@@ -122,12 +122,18 @@ class Vector(object):
                 raise e
 
 
+    def is_orthogonal_to(self, other, tolerance=1e-10):
+        """Returns true if two vectors are orthogonal"""
+        return self.dot_product(other) < tolerance
 
 
+    def is_parallel_to(self, other):
+        """Returns true if two vectors are parallel"""
+       
+        return (self.is_zero() or other.is_zero() or self.angle_with(other) == pi or self.angle_with(other) == 0) 
 
-
-
-
+    def is_zero(self, tolerance=1e-10):
+        return self.magnitude() < tolerance
 
 
 
@@ -159,12 +165,14 @@ class Vector(object):
 v1 = Vector([7.35, 0.221, 5.188])
 v2 = Vector([2.751, 8.259, 3.985])
 
-a = Vector([3.183, -7.627])
+a = Vector([0, 0])
 b = Vector([-2.668, 5.319])
 
-print v1.dot_product(v2)
-print v1.angle_with(v2, in_degrees=True)
-print a.angle_with(b, in_degrees=False)
+# print v1.dot_product(v2)
+# print v1.angle_with(v2, in_degrees=True)
+# print a.angle_with(b, in_degrees=False)
+
+print a.is_parallel_to(b)
 
 
 
